@@ -124,5 +124,9 @@ $('.instructions button').on('click',function(){
     socket.emit('c2s-instruction', $(this).data('word'))
 })
 
+$('.word-button').on('click',function(){
+    socket.emit('c2s-instruction', $('.word').val())
+})
+
 main()
 
