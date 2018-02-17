@@ -39,8 +39,8 @@ function speak(text) {
     synth.speak(utterThis)
 }
 
-socket.on('s2c-instruction', function(text){        
-    var $div = $('<div>' + text + '</div>')
+socket.on('s2c-instruction', function(text) {
+    var $div = $('<div>' + sanitaize(text) + '</div>')
     $('.instruction-display').append($div.addClass('animate'))
     setTimeout(function() {
         $div.remove()
@@ -53,3 +53,7 @@ setInterval(function() {
 }, 1000)
 
 getCurrentPosition()
+
+const sanitaize = str => {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
